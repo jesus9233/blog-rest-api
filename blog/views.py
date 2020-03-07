@@ -57,7 +57,7 @@ class UserLoginAPIView(APIView):
         return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
 
 
-####################### Question Serializers #############################
+####################### Question View #############################
 class QuestionCreateAPIView(CreateAPIView):
     queryset = Question.objects.all()
     serializer_class = QuestionCreateUpdateSerializer
@@ -95,31 +95,31 @@ class QuestionListAPIView(ListAPIView):
     pagination_class = QuestionPageNumberPagination
 
 
-# ####################### Answer Serializers #############################
-# class AnswerCreateAPIView(CreateAPIView):
-#     queryset = Answer.objects.all()
+####################### Answer View #############################
+class AnswerCreateAPIView(CreateAPIView):
+    queryset = Answer.objects.all()
 
-#     def get_serializer_class(self):
-#         model_type = self.request.GET.get("type")
-#         pk = self.request.GET.get("pk")
-#         parent_id = self.request.GET.get("parent_id", None)
-#         return create_answer_serializer(model_type=model_type, pk=pk, parent_id=parent_id, user=self.request.user)
-
-
-# class AnswerDetailAPIView(DestroyModelMixin, UpdateModelMixin, RetrieveAPIView):
-#     queryset = Answer.objects.filter(id__gte=0)
-#     serializer_class = AnswerDetailSerializer
-#     permission_classes = [IsOwnerOrReadOnly]
-
-#     def put(self, request, *args, **kwargs):
-#         return self.update(request, *args, **kwargs)
-
-#     def delete(self, request, *args, **kwargs):
-#         return self.destroy(request, *args, **kwargs)
+    def get_serializer_class(self):
+        model_type = self.request.GET.get("type")
+        pk = self.request.GET.get("pk")
+        parent_id = self.request.GET.get("parent_id", None)
+        return create_answer_serializer(model_type=model_type, pk=pk, parent_id=parent_id, user=self.request.user)
 
 
-# class AnswerListAPIView(ListAPIView):
-#     queryset = Answer.objects.filter(id__gte=0)
-#     serializer_class = AnswerListSerializer
-#     permission_classes = [AllowAny]
-#     pagination_class = QuestionPageNumberPagination
+class AnswerDetailAPIView(DestroyModelMixin, UpdateModelMixin, RetrieveAPIView):
+    queryset = Answer.objects.filter(id__gte=0)
+    serializer_class = AnswerDetailSerializer
+    permission_classes = [IsOwnerOrReadOnly]
+
+    def put(self, request, *args, **kwargs):
+        return self.update(request, *args, **kwargs)
+
+    def delete(self, request, *args, **kwargs):
+        return self.destroy(request, *args, **kwargs)
+
+
+class AnswerListAPIView(ListAPIView):
+    queryset = Answer.objects.filter(id__gte=0)
+    serializer_class = AnswerListSerializer
+    permission_classes = [AllowAny]
+    pagination_class = QuestionPageNumberPagination
