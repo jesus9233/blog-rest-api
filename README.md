@@ -36,7 +36,7 @@ http://127.0.0.1:8000/blog/answers/
 http://127.0.0.1:8000/blog/questions/id/  
 This link includes url for each question. so you can use this url to bookmark.
 - Answer: 
-http://127.0.0.1:8000/blog/answers/id/
+http://127.0.0.1:8000/blog/answers/id/  
 This link includes url for each answer. so you can use this url to bookmark.  
 
 ## 3. Unit Test
