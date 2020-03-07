@@ -1,10 +1,8 @@
-# Rest API development using djangorestapi
-
+# Rest API development using djangorestapi  
 
 ## 1. Install Python libraries
 #### 1) Install Python 3.x
-#### 2) pip install -r requirements
-
+#### 2) pip install -r requirements  
 
 ## 2. Rest API Guide
 #### 1) Authentication
@@ -36,6 +34,13 @@ http://127.0.0.1:8000/blog/answers/
 #### 4) Bookmark for Question and Answer
 - Question: 
 http://127.0.0.1:8000/blog/questions/id/  
-this is 
+This link includes url for each question. so you can use this url to bookmark.
 - Answer: 
 http://127.0.0.1:8000/blog/answers/id/
+This link includes url for each answer. so you can use this url to bookmark.  
+
+## 3. Unit Test
+Use Postman or Django REST framework to do unit tests.
+- If click each link, you can directly do unit test in Django REST framework Panel.  
+
+- If prefer Postman, reference Postman API document.
