@@ -159,145 +159,145 @@ class QuestionListSerializer(serializers.ModelSerializer):
         ]
 
 
-# ####################### Answer Serializers ###############################
-# def create_answer_serializer(model_type='post', pk=None, parent_id=None, user=None):
-#     class AnswerCreateSerializer(serializers.ModelSerializer):
-#         class Meta:
-#             model = Answer
-#             fields = [
-#                 'id',
-#                 'parent',
-#                 'content',
-#                 'timestamp'
-#             ]
+####################### Answer Serializers ###############################
+def create_answer_serializer(model_type='post', pk=None, parent_id=None, user=None):
+    class AnswerCreateSerializer(serializers.ModelSerializer):
+        class Meta:
+            model = Answer
+            fields = [
+                'id',
+                'parent',
+                'content',
+                'timestamp'
+            ]
 
-#         def __init__(self, *args, **kwargs):
-#             self.model_type = model_type
-#             self.pk = pk
-#             self.parent_obj = None
-#             if parent_id:
-#                 parent_qs = Answer.objects.filter(id=parent_id)
-#                 if parent_qs.exists() and parent_qs.count() == 1:
-#                     self.parent_obj = parent_qs.first()
-#             return super(AnswerCreateSerializer, self).__init__(*args, **kwargs)
+        def __init__(self, *args, **kwargs):
+            self.model_type = model_type
+            self.pk = pk
+            self.parent_obj = None
+            if parent_id:
+                parent_qs = Answer.objects.filter(id=parent_id)
+                if parent_qs.exists() and parent_qs.count() == 1:
+                    self.parent_obj = parent_qs.first()
+            return super(AnswerCreateSerializer, self).__init__(*args, **kwargs)
 
-#         def validate(self, data):
-#             model_type = self.model_type
-#             model_qs = ContentType.objects.filter(model=model_type)
-#             if not model_qs.exists() or model_qs.count() != 1:
-#                 raise serializers.ValidationError("This is not a valid content type.")
-#             SomeModel = model_qs.first().model_class()
-#             obj_qs = SomeModel.objects.filter(pk=self.pk)
-#             if not obj_qs.exists() or obj_qs.count() != 1:
-#                 raise serializers.ValidationError("This is not a pk for this content type.")
-#             return data
+        def validate(self, data):
+            model_type = self.model_type
+            model_qs = ContentType.objects.filter(model=model_type)
+            if not model_qs.exists() or model_qs.count() != 1:
+                raise serializers.ValidationError("This is not a valid content type.")
+            SomeModel = model_qs.first().model_class()
+            obj_qs = SomeModel.objects.filter(pk=self.pk)
+            if not obj_qs.exists() or obj_qs.count() != 1:
+                raise serializers.ValidationError("This is not a pk for this content type.")
+            return data
 
-#         def create(self, validated_data):
-#             content = validated_data.get("content")
-#             if user:
-#                 main_user = user
-#             else:
-#                 main_user = User.objects.all().first()
-#             model_type = self.model_type
-#             pk = self.pk
-#             parent_obj = self.parent_obj
-#             answer = Answer.objects.create_by_model_type(
-#                 model_type=model_type,
-#                 pk=pk,
-#                 content=content,
-#                 user=main_user,
-#                 parent_obj=parent_obj
-#             )
-#             return answer
+        def create(self, validated_data):
+            content = validated_data.get("content")
+            if user:
+                main_user = user
+            else:
+                main_user = User.objects.all().first()
+            model_type = self.model_type
+            pk = self.pk
+            parent_obj = self.parent_obj
+            answer = Answer.objects.create_by_model_type(
+                model_type=model_type,
+                pk=pk,
+                content=content,
+                user=main_user,
+                parent_obj=parent_obj
+            )
+            return answer
 
-#     return AnswerCreateSerializer
-
-
-# class AnswerSerializer(serializers.ModelSerializer):
-#     reply_count = serializers.SerializerMethodField()
-#     class Meta:
-#         model = Answer
-#         fields = (
-#             'id',
-#             'content_type',
-#             'object_id',
-#             'parent',
-#             'content',
-#             'reply_count',
-#             'timestamp'
-#         )
-
-#     def get_reply_count(self, obj):
-#         if obj.is_parent:
-#             return obj.children().count()
-#         return 0
+    return AnswerCreateSerializer
 
 
-# class AnswerListSerializer(serializers.ModelSerializer):
-#     url = serializers.HyperlinkedIdentityField(
-#         view_name='answer_detail')
-#     reply_count = serializers.SerializerMethodField()
-#     class Meta:
-#         model = Answer
-#         fields = [
-#             'url',
-#             'id',
-#             'content',
-#             'reply_count',
-#             'timestamp',
-#         ]
+class AnswerSerializer(serializers.ModelSerializer):
+    reply_count = serializers.SerializerMethodField()
+    class Meta:
+        model = Answer
+        fields = (
+            'id',
+            'content_type',
+            'object_id',
+            'parent',
+            'content',
+            'reply_count',
+            'timestamp'
+        )
+
+    def get_reply_count(self, obj):
+        if obj.is_parent:
+            return obj.children().count()
+        return 0
+
+
+class AnswerListSerializer(serializers.ModelSerializer):
+    url = serializers.HyperlinkedIdentityField(
+        view_name='answer_detail')
+    reply_count = serializers.SerializerMethodField()
+    class Meta:
+        model = Answer
+        fields = [
+            'url',
+            'id',
+            'content',
+            'reply_count',
+            'timestamp',
+        ]
     
-#     def get_reply_count(self, obj):
-#         if obj.is_parent:
-#             return obj.children().count()
-#         return 0
+    def get_reply_count(self, obj):
+        if obj.is_parent:
+            return obj.children().count()
+        return 0
 
 
-# class AnswerChildSerializer(serializers.ModelSerializer):
-#     user = UserDetailSerializer(read_only=True)
-#     class Meta:
-#         model = Answer
-#         fields = (
-#             'id',
-#             'user',
-#             'content',
-#             'timestamp'
-#         )
+class AnswerChildSerializer(serializers.ModelSerializer):
+    user = UserDetailSerializer(read_only=True)
+    class Meta:
+        model = Answer
+        fields = (
+            'id',
+            'user',
+            'content',
+            'timestamp'
+        )
 
 
-# class AnswerDetailSerializer(serializers.ModelSerializer):
-#     user = UserDetailSerializer(read_only=True)
-#     reply_count = serializers.SerializerMethodField()
-#     content_object_url = serializers.SerializerMethodField()
-#     replies = serializers.SerializerMethodField()
-#     class Meta:
-#         model = Answer
-#         fields = [
-#             'id',
-#             'user',
-#             'content',
-#             'reply_count',
-#             'replies',
-#             'timestamp',
-#             'content_object_url',
-#         ]
-#         read_only_fields = [
-#             'reply_count',
-#             'replies',
-#         ]
+class AnswerDetailSerializer(serializers.ModelSerializer):
+    user = UserDetailSerializer(read_only=True)
+    reply_count = serializers.SerializerMethodField()
+    content_object_url = serializers.SerializerMethodField()
+    replies = serializers.SerializerMethodField()
+    class Meta:
+        model = Answer
+        fields = [
+            'id',
+            'user',
+            'content',
+            'reply_count',
+            'replies',
+            'timestamp',
+            'content_object_url',
+        ]
+        read_only_fields = [
+            'reply_count',
+            'replies',
+        ]
 
-#     def get_content_object_url(self, obj):
-#         try:
-#             return obj.content_object.get_api_url()
-#         except:
-#             return None
+    def get_content_object_url(self, obj):
+        try:
+            return obj.content_object.get_api_url()
+        except:
+            return None
 
-#     def get_replies(self, obj):
-#         if obj.is_parent:
-#             return AnswerChildSerializer(obj.children(), many=True).data
-#         return None
+    def get_replies(self, obj):
+        if obj.is_parent:
+            return AnswerChildSerializer(obj.children(), many=True).data
+        return None
 
-#     def get_reply_count(self, obj):
-#         if obj.is_parent:
-#             return obj.children().count()
-#         return 0
+    def get_reply_count(self, obj):
+        if obj.is_parent:
+            return obj.children().count()
+        return 0
