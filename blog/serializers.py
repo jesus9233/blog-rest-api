@@ -267,6 +267,8 @@ class AnswerChildSerializer(serializers.ModelSerializer):
 
 class AnswerDetailSerializer(serializers.ModelSerializer):
     user = UserDetailSerializer(read_only=True)
+    url = serializers.HyperlinkedIdentityField(
+        view_name='answer_detail')
     reply_count = serializers.SerializerMethodField()
     content_object_url = serializers.SerializerMethodField()
     replies = serializers.SerializerMethodField()
@@ -275,6 +277,7 @@ class AnswerDetailSerializer(serializers.ModelSerializer):
         fields = [
             'id',
             'user',
+            'url',
             'content',
             'reply_count',
             'replies',
