@@ -5,13 +5,13 @@
 #### 2) pip install -r requirements
 
 ## 2. Rest API Guide
-1) Authentication
+#### 1) Authentication
 - Login
 http://127.0.0.1:8000/blog/users/login/
 - Register
 http://127.0.0.1:8000/blog/users/register/
 
-2) Question api
+#### 2) Question api
 - Create question
 http://127.0.0.1:8000/blog/questions/create/
 - Question detail
