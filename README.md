@@ -1,8 +1,10 @@
 # Rest API development using djangorestapi
 
+
 ## 1. Install Python libraries
 #### 1) Install Python 3.x
 #### 2) pip install -r requirements
+
 
 ## 2. Rest API Guide
 #### 1) Authentication
