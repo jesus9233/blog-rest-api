@@ -8,14 +8,33 @@
 
 ## 2. Rest API Guide
 #### 1) Authentication
-- Login
+- Login: 
 http://127.0.0.1:8000/blog/users/login/
-- Register
+- Register: 
 http://127.0.0.1:8000/blog/users/register/
 
 #### 2) Question api
-- Create question
+- Post question: 
 http://127.0.0.1:8000/blog/questions/create/
-- Question detail
+- Question detail: 
 http://127.0.0.1:8000/blog/questions/id/
-- Edit question
+- Edit question: 
+http://127.0.0.1:8000/blog/questions/id/edit/
+- Delete question: 
+http://127.0.0.1:8000/blog/questions/id/delete/
+- View questions: 
+http://127.0.0.1:8000/blog/questions/
+
+#### 3) Answer api
+- Post answer: 
+http://127.0.0.1:8000/blog/answers/create/
+- Answer detail: 
+http://127.0.0.1:8000/blog/answers/id/
+- View answers: 
+http://127.0.0.1:8000/blog/answers/
+
+#### 4) Bookmark for Question and Answer
+- Question: 
+http://127.0.0.1:8000/blog/questions/id/
+- Answer: 
+http://127.0.0.1:8000/blog/answers/id/
