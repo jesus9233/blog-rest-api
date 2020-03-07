@@ -35,6 +35,7 @@ http://127.0.0.1:8000/blog/answers/
 
 #### 4) Bookmark for Question and Answer
 - Question: 
-http://127.0.0.1:8000/blog/questions/id/
+http://127.0.0.1:8000/blog/questions/id/  
+this is 
 - Answer: 
 http://127.0.0.1:8000/blog/answers/id/
