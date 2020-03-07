@@ -42,5 +42,5 @@ This link includes url for each answer. so you can use this url to bookmark.
 ## 3. Unit Test
 Use Postman or Django REST framework to do unit tests.
 - If click each link, you can directly do unit test in Django REST framework Panel.  
-
+https://github.com/jesus9233/blog-rest-api/blob/master/media/images/DRF.PNG
 - If prefer Postman, reference Postman API document.
