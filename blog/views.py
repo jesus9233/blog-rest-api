@@ -57,42 +57,42 @@ class UserLoginAPIView(APIView):
         return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
 
 
-# ####################### Question Serializers #############################
-# class QuestionCreateAPIView(CreateAPIView):
-#     queryset = Question.objects.all()
-#     serializer_class = QuestionCreateUpdateSerializer
+####################### Question Serializers #############################
+class QuestionCreateAPIView(CreateAPIView):
+    queryset = Question.objects.all()
+    serializer_class = QuestionCreateUpdateSerializer
 
-#     def perform_create(self, serializer):
-#         serializer.save(user=self.request.user)
-
-
-# class QuestionDetailAPIView(RetrieveAPIView):
-#     queryset = Question.objects.all()
-#     serializer_class = QuestionDetailSerializer
-#     permission_classes = [AllowAny]
-#     # lookup_field = 'slug'
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 
 
-# class QuestionUpdateAPIView(RetrieveUpdateAPIView):
-#     queryset = Question.objects.all()
-#     serializer_class = QuestionCreateUpdateSerializer
-#     permission_classes = [IsOwnerOrReadOnly]
-
-#     def perform_update(self, serializer):
-#         serializer.save(user=self.request.user)
+class QuestionDetailAPIView(RetrieveAPIView):
+    queryset = Question.objects.all()
+    serializer_class = QuestionDetailSerializer
+    permission_classes = [AllowAny]
+    # lookup_field = 'slug'
 
 
-# class QuestionDeleteAPIView(DestroyAPIView):
-#     queryset = Question.objects.all()
-#     serializer_class = QuestionDetailSerializer
-#     permission_classes = [IsOwnerOrReadOnly]
+class QuestionUpdateAPIView(RetrieveUpdateAPIView):
+    queryset = Question.objects.all()
+    serializer_class = QuestionCreateUpdateSerializer
+    permission_classes = [IsOwnerOrReadOnly]
+
+    def perform_update(self, serializer):
+        serializer.save(user=self.request.user)
 
 
-# class QuestionListAPIView(ListAPIView):
-#     queryset = Question.objects.all()
-#     serializer_class = QuestionListSerializer
-#     permission_classes = [AllowAny]
-#     pagination_class = QuestionPageNumberPagination
+class QuestionDeleteAPIView(DestroyAPIView):
+    queryset = Question.objects.all()
+    serializer_class = QuestionDetailSerializer
+    permission_classes = [IsOwnerOrReadOnly]
+
+
+class QuestionListAPIView(ListAPIView):
+    queryset = Question.objects.all()
+    serializer_class = QuestionListSerializer
+    permission_classes = [AllowAny]
+    pagination_class = QuestionPageNumberPagination
 
 
 # ####################### Answer Serializers #############################
