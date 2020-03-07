@@ -96,67 +96,67 @@ class UserLoginSerializer(serializers.ModelSerializer):
         return data
 
 
-# ###################### Question ###########################
-# class QuestionCreateUpdateSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Question
-#         fields = (
-#             'id',
-#             'title',
-#             'content'
-#         )
+###################### Question ###########################
+class QuestionCreateUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Question
+        fields = (
+            'id',
+            'title',
+            'content'
+        )
 
 
-# question_detail_url = serializers.HyperlinkedIdentityField(
-#     view_name='question_detail',
-#     lookup_field='pk'
-# )
+question_detail_url = serializers.HyperlinkedIdentityField(
+    view_name='question_detail',
+    lookup_field='pk'
+)
 
 
-# class QuestionDetailSerializer(serializers.ModelSerializer):
-#     url = question_detail_url
-#     user = UserDetailSerializer(read_only=True)
-#     image = serializers.SerializerMethodField()
-#     answers = serializers.SerializerMethodField()
+class QuestionDetailSerializer(serializers.ModelSerializer):
+    url = question_detail_url
+    user = UserDetailSerializer(read_only=True)
+    image = serializers.SerializerMethodField()
+    answers = serializers.SerializerMethodField()
 
-#     class Meta:
-#         model = Question
-#         fields = (
-#             'id',
-#             'user',
-#             'image',
-#             'url',
-#             'title',
-#             'slug',
-#             'content',
-#             'answers'
-#         )
+    class Meta:
+        model = Question
+        fields = (
+            'id',
+            'user',
+            'image',
+            'url',
+            'title',
+            'slug',
+            'content',
+            'answers'
+        )
 
-#     def get_image(self, obj):
-#         try:
-#             image = obj.image.path
-#         except:
-#             image = None
-#         return image
+    def get_image(self, obj):
+        try:
+            image = obj.image.path
+        except:
+            image = None
+        return image
 
-#     def get_answers(self, obj):
-#         a_qs = Answer.objects.filter_by_instance(obj)
-#         answers = AnswerSerializer(a_qs, many=True).data
-#         return answers
+    def get_answers(self, obj):
+        a_qs = Answer.objects.filter_by_instance(obj)
+        answers = AnswerSerializer(a_qs, many=True).data
+        return answers
 
 
-# class QuestionListSerializer(serializers.ModelSerializer):
-#     url = question_detail_url
-#     user = UserDetailSerializer(read_only=True)
-#     class Meta:
-#         model = Question
-#         fields = [
-#             'id',
-#             'url',
-#             'user',
-#             'title',
-#             'content',
-#         ]
+class QuestionListSerializer(serializers.ModelSerializer):
+    url = question_detail_url
+    user = UserDetailSerializer(read_only=True)
+    class Meta:
+        model = Question
+        fields = [
+            'id',
+            'url',
+            'user',
+            'title',
+            'content',
+        ]
 
 
 # ####################### Answer Serializers ###############################
