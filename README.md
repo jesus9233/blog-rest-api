@@ -3,8 +3,21 @@
 ## 1. Install Python libraries
 #### 1) Install Python 3.x
 #### 2) pip install -r requirements  
+#### 3) python manage.py runserver
 
-## 2. Rest API Guide
+## 2. Database
+#### PostgreSQL
+- Database name: 'blog'
+- User: 'postgres'
+- Password: '1234'
+- Host: '127.0.0.1'
+- Port: '5432'
+#### Database Structure
+- auth_user table: (username, email password)
+- blog_question table: (title, slug, content, created_at, user_id, height_field, image, width_field)
+- blog_answer table: (object_id, content, timestamp, content_type_id, parent_id, user_id)
+
+## 3. Rest API Guide
 #### 1) Authentication
 - Login: 
 http://127.0.0.1:8000/blog/users/login/
